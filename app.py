@@ -1,20 +1,38 @@
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
-def initialize_database():
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Change this to a random secret key
+
+def get_db_connection():
     conn = sqlite3.connect('hw13.db')
-    cursor = conn.cursor()
+    conn.row_factory = sqlite3.Row
+    return conn
 
-    # Create tables
-    with open('schema.sql', 'r') as f:
-        cursor.executescript(f.read())
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'password':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            session['logged_in'] = True
+            return redirect(url_for('dashboard'))
+    return render_template('login.html', error=error)
 
-    # Insert initial data
-    cursor.execute("INSERT INTO students (first_name, last_name) VALUES (?, ?)", ("John", "Smith"))
-    cursor.execute("INSERT INTO quizzes (subject, question_count, quiz_date) VALUES (?, ?, ?)", ("Python Basics", 5, "2015-02-05"))
-    cursor.execute("INSERT INTO results (student_id, quiz_id, score) VALUES (?, ?, ?)", (1, 1, 85))
+@app.route('/dashboard')
+def dashboard():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
 
-    conn.commit()
+    conn = get_db_connection()
+    students = conn.execute('SELECT * FROM students').fetchall()
+    quizzes = conn.execute('SELECT * FROM quizzes').fetchall()
     conn.close()
 
-if __name__ == "__main__":
-    initialize_database()
+    return render_template('dashboard.html', students=students, quizzes=quizzes)
+
+# Add routes for adding students, quizzes, viewing results, etc.
+
+if __name__ == '__main__':
+    app.run(debug=True)
