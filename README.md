@@ -23,20 +23,14 @@ To get this application running on your local machine, follow these steps:
 Install Flask:
 If you haven't installed Flask, do it using pip:
 
-bash
-Copy code
 pip install Flask
 Initialize the Database:
 Run the initialize-app.py script to set up the SQLite database:
 
-bash
-Copy code
 python initialize-app.py
 Run the Application:
 Start the Flask application by running:
 
-bash
-Copy code
 flask run
 Usage
 Logging In
