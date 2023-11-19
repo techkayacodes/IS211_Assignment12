@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key = '595-359-861'  # Change this to a random secret key
+app.secret_key = 'your secret key'  # Change this to a random secret key
 
 def get_db_connection():
     conn = sqlite3.connect('hw13.db')
