@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">School</span> Management System</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Add Quiz</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="post" action="{{ url_for('add_quiz') }}">
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="question_count">Number of Questions:</label>
+                <input type="number" id="question_count" name="question_count" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="quiz_date">Date:</label>
+                <input type="date" id="quiz_date" name="quiz_date" required>
+            </div>
+            <input type="submit" value="Add Quiz">
+        </form>
+    </div>
+</body>
+</html>
