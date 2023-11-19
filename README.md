@@ -20,26 +20,30 @@ To get this application running on your local machine, follow these steps:
    ```bash
    git clone [repository-url]
    cd IS211_Assignment12
-Install Flask:
+
+2. **Install Flask:**
 If you haven't installed Flask, do it using pip:
-
 pip install Flask
-Initialize the Database:
+
+3. **Initialize the Database:**
 Run the initialize-app.py script to set up the SQLite database:
-
 python initialize-app.py
-Run the Application:
-Start the Flask application by running:
 
+4. **Run the Application:**
+Start the Flask application by running:
 flask run
-Usage
-Logging In
+
+## **Usage**
+**Logging In**
 To log in to the application:
 
-Navigate to http://127.0.0.1:5000/login in your web browser.
-Use the following credentials:
-Username: admin
-Password: password
-Upon successful login, you will be redirected to the dashboard.
+1. Navigate to http://127.0.0.1:5000/login in your web browser.
+
+2. Use the following credentials:
+- Username: admin
+- Password: password
+
+3. Upon successful login, you will be redirected to the dashboard.
 Dashboard
+
 On the dashboard, you can view lists of students and quizzes. You also have options to add new students, add new quizzes, and view quiz results for each student.
